@@ -11,6 +11,9 @@
 })(typeof window !== "undefined" ? window : this, () => {
   "use strict";
   let vConsole = new VConsole();
+  setTimeout(function() {
+    console.log(navigator);
+  }, 5000);
   return class QrCodeRecognition {
     constructor(opts = {}) {
       this.timer = null;
