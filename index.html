@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>二维码：生成、扫描、识别</title>
-    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="./css/base.css" />
   </head>
 
   <body>
@@ -42,14 +42,13 @@
     </main>
 
     <canvas class="canvas" id="canvas"></canvas>
-
-    <script src="jimp.js"></script>
-    <script src="jsqr.js"></script>
-    <script src="base.js"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+    <script src="./js/jimp.js"></script>
+    <script src="./js/jsqr.js"></script>
+    <script src="./js/base.js"></script>
 
     <script>
       const result = document.querySelector("#result");
-
       const QrCode = new QrCodeRecognition({
         sweepId: "#canvas", // 扫一扫
         uploadId: "#file", // 从相册选择
@@ -75,3 +74,4 @@
     </script>
   </body>
 </html>
+
