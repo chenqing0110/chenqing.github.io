@@ -168,7 +168,7 @@
             _self.audio.play();
             _self.seuccess(resolve);
           } catch (err) {
-            this.error("识别失败，请检查二维码是否正确！", err);
+            _self.error("识别失败，请检查二维码是否正确！", err);
           } finally {
             // console.info("读取到的文件：", res);
           }
