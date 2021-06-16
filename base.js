@@ -162,6 +162,7 @@
           Jimp.read(e.target.result)
             .then(async (res) => {
               console.log(res);
+          console.log(res.bitmap.data)
               const { data, width, height } = res.bitmap;
           console.log(data);
               //   try {
