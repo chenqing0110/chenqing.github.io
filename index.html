@@ -47,13 +47,14 @@
     </main>
 
     <canvas class="canvas" id="canvas"></canvas>
-    <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+
     <script src="jimp.js"></script>
     <script src="jsqr.js"></script>
     <script src="base.js"></script>
 
     <script>
       const result = document.querySelector("#result");
+
       const QrCode = new QrCodeRecognition({
         sweepId: "#canvas", // 扫一扫
         uploadId: "#file", // 从相册选择
@@ -79,4 +80,3 @@
     </script>
   </body>
 </html>
-
