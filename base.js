@@ -143,40 +143,42 @@
       }
     }
 
-    upload() {
+     upload() {
       this.cance();
       const file = this.file.files[0];
       const createObjectURL =
         window.createObjectURL ||
         window.URL.createObjectURL ||
         window.webkitURL.createObjectUR;
-
+      const img = document.querySelector("#imgurl");
       const fReader = new FileReader();
       fReader.readAsDataURL(file); // Base64 8Bit字节码
       // fReader.readAsBinaryString(file);  // Binary 原始二进制
       // fReader.readAsArrayBuffer(file);   // ArrayBuffer 文件流
       fReader.onload = (e) => {
-        document.querySelector("#imgurl").src =
-          e.target.result || createObjectURL(file);
+        img.src = e.target.result || createObjectURL(file);
+        console.log(e.target.result);
         e.target.result &&
           Jimp.read(e.target.result)
             .then(async (res) => {
+              console.log(res);
               const { data, width, height } = res.bitmap;
-              try {
-                console.log(data);
-                const resolve = await jsQR(data, width, height);
-                console.log("resolve", resolve);
-                this.seuccess(resolve);
-              } catch (err) {
-                this.error("识别失败，请检查二维码是否正确！", err);
-              } finally {
-                console.info("读取到的文件：", res);
-              }
+              //   try {
+              //     console.log(data);
+              //     const resolve = await jsQR(data, width, height);
+              //     console.log("resolve", resolve);
+              //     this.seuccess(resolve);
+              //   } catch (err) {
+              //     this.error("识别失败，请检查二维码是否正确！", err);
+              //   } finally {
+              //     console.info("读取到的文件：", res);
+              //   }
             })
             .catch((err) => {
               this.error("文件读取错误：", err);
             });
       };
+      img.onload = function() {};
     }
   };
 });
