@@ -53,7 +53,7 @@
         try {
           const img = this.canvas.getImageData(0, 0, videoWidth, videoHeight);
           document.querySelector("#imgurl").src = img;
-          console.log("img.data", img.data);
+          console.log("img.data1", img.data);
           const obj = jsQR(img.data, img.width, img.height, {
             inversionAttempts: "dontInvert",
           });
@@ -157,12 +157,13 @@
       // fReader.readAsArrayBuffer(file);   // ArrayBuffer 文件流
       fReader.onload = (e) => {
         img.src = e.target.result || createObjectURL(file);
-        console.log(e.target.result);
+//         console.log(e.target.result);
         e.target.result &&
           Jimp.read(e.target.result)
             .then(async (res) => {
               console.log(res);
               const { data, width, height } = res.bitmap;
+          console.log(data);
               //   try {
               //     console.log(data);
               //     const resolve = await jsQR(data, width, height);
@@ -178,7 +179,7 @@
               this.error("文件读取错误：", err);
             });
       };
-      img.onload = function() {};
+     
     }
   };
 });
