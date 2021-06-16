@@ -150,37 +150,47 @@
         window.createObjectURL ||
         window.URL.createObjectURL ||
         window.webkitURL.createObjectUR;
-      const img = document.querySelector("#imgurl");
+      const _self = this;
       const fReader = new FileReader();
       fReader.readAsDataURL(file); // Base64 8Bit字节码
       // fReader.readAsBinaryString(file);  // Binary 原始二进制
       // fReader.readAsArrayBuffer(file);   // ArrayBuffer 文件流
       fReader.onload = (e) => {
+        const img = document.querySelector("#imgurl");
         img.src = e.target.result || createObjectURL(file);
-//         console.log(e.target.result);
-        e.target.result &&
-          Jimp.read(e.target.result)
-            .then(async (res) => {
-              console.log(res);
-          console.log(res.bitmap.data)
-              const { data, width, height } = res.bitmap;
-          console.log(data);
-              //   try {
-              //     console.log(data);
-              //     const resolve = await jsQR(data, width, height);
-              //     console.log("resolve", resolve);
-              //     this.seuccess(resolve);
-              //   } catch (err) {
-              //     this.error("识别失败，请检查二维码是否正确！", err);
-              //   } finally {
-              //     console.info("读取到的文件：", res);
-              //   }
-            })
-            .catch((err) => {
-              this.error("文件读取错误：", err);
-            });
+        img.onload = function() {
+          _self.canvas.drawImage(this, 0, 0, this.width, this.height);
+          var image = new Image();
+          const x = _self.canvas.getImageData(0, 0, this.width, this.height);
+          image.src = x;
+          try {
+            const resolve = jsQR(x.data, x.width, x.height);
+            _self.audio.play();
+            _self.seuccess(resolve);
+          } catch (err) {
+            this.error("识别失败，请检查二维码是否正确！", err);
+          } finally {
+            // console.info("读取到的文件：", res);
+          }
+        };
       };
-     
+      // e.target.result &&
+      //   Jimp.read(e.target.result)
+      //     .then(async (res) => {
+      //       const { data, width, height } = res.bitmap;
+      //       try {
+      //         const resolve = await jsQR(data, width, height);
+      //         this.audio.play();
+      //         this.seuccess(resolve);
+      //       } catch (err) {
+      //         this.error("识别失败，请检查二维码是否正确！", err);
+      //       } finally {
+      //         console.info("读取到的文件：", res);
+      //       }
+      //     })
+      //     .catch((err) => {
+      //       this.error("文件读取错误：", err);
+      //     });
     }
   };
 });
