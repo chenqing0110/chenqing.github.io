@@ -17,12 +17,17 @@
 
     <h1 class="h1">纯前端 JS ：二维码：生成、扫描、识别 (HTML版)</h1>
     <hr />
- <input type="file" accept="image/*" capture="camera" onchange="upload()" />
     <main class="main">
       <div class="reader">
         <button class="sweep" onclick="sweep()">扫一扫</button>
         <button class="sweep">
-          <input type="file" id="file" onchange="upload()" />从相册选择
+          <input
+            type="file"
+            id="file"
+            onchange="upload()"
+            accept="image/*"
+            capture="camera"
+          />拍照
         </button>
         <div class="imgurl">
           <img
