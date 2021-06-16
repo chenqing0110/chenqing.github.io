@@ -162,7 +162,7 @@
               const { data, width, height } = res.bitmap;
               try {
                 const resolve = await jsQR(data, width, height);
-                this.audio.play();
+                console.log("resolve", resolve);
                 this.seuccess(resolve);
               } catch (err) {
                 this.error("识别失败，请检查二维码是否正确！", err);
