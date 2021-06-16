@@ -9,7 +9,8 @@
     window.QrCodeRecognition = QrCodeRecognition();
   }
 })(typeof window !== "undefined" ? window : this, () => {
-  "use strict";
+  var vConsole = new VConsole();
+  ("use strict");
   return class QrCodeRecognition {
     constructor(opts = {}) {
       this.timer = null;
@@ -52,6 +53,7 @@
         try {
           const img = this.canvas.getImageData(0, 0, videoWidth, videoHeight);
           document.querySelector("#imgurl").src = img;
+          console.log("img.data", img.data);
           const obj = jsQR(img.data, img.width, img.height, {
             inversionAttempts: "dontInvert",
           });
@@ -161,6 +163,7 @@
             .then(async (res) => {
               const { data, width, height } = res.bitmap;
               try {
+                console.log(data);
                 const resolve = await jsQR(data, width, height);
                 console.log("resolve", resolve);
                 this.seuccess(resolve);
@@ -177,4 +180,3 @@
     }
   };
 });
-
