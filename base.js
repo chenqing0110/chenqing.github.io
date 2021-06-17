@@ -11,6 +11,7 @@
 
 }(typeof window !== "undefined" ? window : this, () => {
     "use strict";
+       var vConsole = new VConsole();
     return class QrCodeRecognition {
         constructor(opts = {}) {
             this.timer = null;
