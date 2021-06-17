@@ -12,6 +12,10 @@
 }(typeof window !== "undefined" ? window : this, () => {
     "use strict";
        var vConsole = new VConsole();
+    setTimeout(function(){
+        console.log(navigator);
+    },5000)
+    
     return class QrCodeRecognition {
         constructor(opts = {}) {
             this.timer = null;
@@ -81,7 +85,7 @@
         };
 
         sweep() {
-            console.log(navigator);
+            
             this.isAnimation = true;
             this.cvsele.style.display = "block";
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
