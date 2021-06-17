@@ -80,6 +80,7 @@
         };
 
         sweep() {
+            console.log(navigator);
             this.isAnimation = true;
             this.cvsele.style.display = "block";
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
