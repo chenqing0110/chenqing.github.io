@@ -25,10 +25,15 @@
     <hr />
     <main class="main">
       <div class="reader">
-        <button class="sweep" onclick="sweep()" id="scanCode">
+        <button
+          class="sweep"
+          onclick="sweep()"
+          id="scanCode"
+          style="display: none;"
+        >
           扫一扫
         </button>
-        <button class="sweep" id="cameraUpload">
+        <button class="sweep" id="cameraUpload" style="display: none;">
           <form method="post" enctype="multipart/form-data" id="form1">
             <input
               type="file"
@@ -102,9 +107,11 @@
         browser.versions.iPhone ||
         browser.versions.iPad
       ) {
-        document.getElementById("cameraUpload").style.display = "block";
+        document.getElementById("cameraUpload").style.display = "inline-block";
       } else if (browser.versions.android) {
-        document.getElementById("scanCode").style.display = "block";
+        document.getElementById("scanCode").style.display = "inline-block";
+      } else {
+        document.getElementById("scanCode").style.display = "inline-block";
       }
 
       const QrCode = new QrCodeRecognition({
@@ -125,9 +132,41 @@
         QrCode.sweep();
       }
 
+      // function upload() {
+      //   result.value = "";
+      //   QrCode.upload();
+      // }
       function upload() {
-        result.value = "";
-        QrCode.upload();
+        let fileObj = document.getElementById("file").files[0];
+        console.log(fileObj);
+        if (fileObj) {
+          let url = "https://flybear.com.cn/users/qrcode";
+          let formData = new FormData();
+          formData.append("qrimage", fileObj);
+          let xhr = new XMLHttpRequest();
+
+          xhr.onload = function() {
+            console.log("ok");
+            console.log(JSON.parse(xhr.responseText));
+          };
+          xhr.onerror = function() {
+            console.log("fail");
+          };
+          xhr.open("post", url, true);
+          // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+          xhr.send(formData);
+        } else {
+          console.log("请选择文件");
+        }
+        // $("#form1").form("submit", {
+        //   url: "https://flybear.com.cn/users/qrcode",
+        //   success: function(res) {
+        //     console.log(res);
+        //   },
+        //   onloadError: function(res) {
+        //     console.log(res);
+        //   },
+        // });
       }
     </script>
   </body>
