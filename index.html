@@ -25,7 +25,9 @@
     <hr />
     <main class="main">
       <div class="reader">
-        <button class="sweep" onclick="sweep()" id="scanCode">扫一扫</button>
+        <button class="sweep" onclick="sweep()" id="scanCode">
+          扫一扫
+        </button>
         <button class="sweep" id="cameraUpload">
           <form method="post" enctype="multipart/form-data" id="form1">
             <input
@@ -100,9 +102,9 @@
         browser.versions.iPhone ||
         browser.versions.iPad
       ) {
-        document.getElementById("scanCode").style.display = "none";
+        document.getElementById("cameraUpload").style.display = "block";
       } else if (browser.versions.android) {
-        document.getElementById("cameraUpload").style.display = "none";
+        document.getElementById("scanCode").style.display = "block";
       }
 
       const QrCode = new QrCodeRecognition({
@@ -126,17 +128,6 @@
       function upload() {
         result.value = "";
         QrCode.upload();
-      }
-      function upload() {
-        $("#form1").form("submit", {
-          url: "https://flybear.com.cn/users/uploads",
-          success: function(res) {
-            console.log(res);
-          },
-          onloadError: function(res) {
-            console.log(res);
-          },
-        });
       }
     </script>
   </body>
