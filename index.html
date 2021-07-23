@@ -147,9 +147,11 @@
 
           xhr.onload = function() {
             console.log("ok");
+            QrCode.error(JSON.parse(xhr.responseText).url);
             console.log(JSON.parse(xhr.responseText));
           };
           xhr.onerror = function() {
+            QrCode.error("图片未识别，请重新拍照");
             console.log("fail");
           };
           xhr.open("post", url, true);
